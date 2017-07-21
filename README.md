@@ -52,9 +52,9 @@ For information on creating CAAC webhooks look here https://rally1.rallydev.com/
 	- Set the path to be the Web Service URL of the 'CA Agility Central - Defect' form above.
 	- This is the complicated part... lines 43 to 56 parse out the parameters we want from the large and ugly incoming json packet.  You'll see some of the lines, such as line 45 for the title, have a UUID in them, I suspect they'll be different values for you.  If so you can look at the bottom of this page to see the section 'How to find an Attribute UUID'.  I found it easier (not knowing CAAC) to just set up the integration and from teh xMatters activity stream look at the entire incoming json (in TextWrangler or similar) and work my way through them.  For example, if you search for Notes you get this section...
 
-"abb5af67-e70a-4a98-ad21-26f71bf4fe83":{"value":"These are some notes","type":"Text","name":"Notes","display_name":"Notes","ref":null},
+	"abb5af67-e70a-4a98-ad21-26f71bf4fe83":{"value":"These are some notes","type":"Text","name":"Notes","display_name":"Notes","ref":null},
 
-You then take the UUID and use that in line 49 etc.  Sorry, it's a bit painful but you'll get there.
+	You then take the UUID and use that in line 49 etc.  Sorry, it's a bit painful but you'll get there.
 	- Copy the webhook URL for the inbound integration
 4. Edit the outbound integration:
 	- Check that the URL for the CAAgile endpoint is set to https://rally1.rallydev.com
