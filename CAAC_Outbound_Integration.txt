@@ -1,0 +1,77 @@
+/******************************************************************************
+ * Outbound integrations
+ *
+ * Outbound integrations are triggered when an xMatters system action occurs,
+ * such as when an event status changes, a notification is delivered, or a
+ * recipient responds to a message. These system actions are called 'triggers'.
+ *
+ * Outbound integrations can perform tasks such as initiating a follow-up xMatters
+ * event when the status of an event changes or updating another system in your
+ * toolchain when a user responds to a notification.
+ *
+ * xMatters passes information about the trigger to the outbound integration
+ * as a JSON object in the body of the built-in request object. Your outbound
+ * integration can process this data and use it in the script. (To include form
+ * properties in the request data, select 'Include in Outbound Integrations'
+ * from the property's settings on the form layout.)
+ *
+ * The following sample code shows how to work with scripts in the Integration
+ * Builder. You can use it as a template and then customize it to work with your
+ * integration.
+ ******************************************************************************/
+
+/**
+ * Parse the payload data
+ *
+ * This code shows how to extract the payload from the built-in request object.
+ * The specific fields that are included in the payload depends on the type of
+ * trigger and how many form properties are included.
+ */
+
+
+
+
+var payload = JSON.parse(request.body);
+
+if (payload.eventProperties && Array.isArray(payload.eventProperties)) {
+    var eventProperties = payload.eventProperties;
+    payload.eventProperties = {};
+
+    for (var i = 0; i < eventProperties.length; i++) {
+        var eventProperty = eventProperties[i];
+        var key = Object.keys(eventProperty)[0];
+        payload.eventProperties[key] = eventProperty[key];
+    }
+}
+
+
+console.log ('postback_url = ' + payload.eventProperties.postback_url);
+console.log('response = ' + payload.response);
+
+switch (payload.response) {
+case 'Set To Open':
+SetToOpen();
+break;
+}
+
+
+function SetToOpen(){
+
+var trigger = JSON.stringify({
+"Defect":
+    {      
+      "State": "Open"
+    }
+});
+console.log( 'Response payload: ' + JSON.stringify( trigger ) );
+var req = http.request({
+method: 'POST',
+endpoint: 'CAAgile',
+path: payload.eventProperties.postback_url,
+headers: {
+'Content-Type': 'application/json',
+'Cookie': 'ZSESSIONID=_G0HXXXXXQ9yLnbnLP8sp9XXXXXTsEiOtWFDXXXXXX'
+}
+});
+req.write(trigger);
+}

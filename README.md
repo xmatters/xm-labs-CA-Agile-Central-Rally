@@ -17,8 +17,9 @@ This is a full closed loop integration, also allowing you to respond via the xMa
 
 # Files
 
-* [Loggly.zip](Loggly.zip) - The comm plan (that has all the scripts and email format and such)
-* [Loggly_Incoming.js](Loggly_Incoming.js) - The Integration Builder JS to setup the inbound integration into xM, should you need it standalone to the Comm Plan.
+* [CAAgileCentralRally.zip](CAAgileCentralRally.zip) - The comm plan (that has all the scripts and email format and such)
+* [CAAC_Inbound_Integration.txt](CAAC_Inbound_Integration.txt) - The Integration Builder JS to setup the inbound integration into xMatters from CAAC, should you need it standalone to the Comm Plan.
+* [CAAC_Outbound_Integration.txt](CAAC_Outbound_Integration.txt) - The Integration Builder JS to setup the outbound integration from xMatters back to CAAC, should you need it standalone to the Comm Plan.
 * [Loggly_xMatters_Integration.mp4](Media/Loggly_xMatters_Integration.mp4) - Video example of the finished integration
 
 

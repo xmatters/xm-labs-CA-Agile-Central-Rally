@@ -1,0 +1,109 @@
+/******************************************************************************
+ * Inbound integrations - run a script
+ *
+ * Using an inbound integration to run a script enables you to access the full
+ * functionality of the xMatters REST API with simple HTTP call.
+ *
+ * Each inbound integration is authenticated independently, which allows you to
+ * run the script without storing the login credentials of your xMatters account
+ * in an external system.
+ *
+ * Scripts can use the xMatters REST API to manage users, groups, and events,
+ * see who is on call, or perform any other system actions available in the xMatters
+ * REST API (see https://help.xmatters.com/xmAPI). Scripts can also interact with other
+ * systems in your toolchain by calling endpoints over HTTP.
+ *
+ * When you choose the Run a script action in the Integration Builder, the script
+ * is not associated with a specific form and the built-in form object is not available.
+ *
+ * The following sample code shows how to parse the payload from the inbound integration
+ * request, extract a ticket number, and then use the xMatters REST API to find and
+ * terminate matching events. You can use it as a template and then customize it to work
+ * with your integration.
+ */
+
+/**
+ * Parse incoming data
+ *
+ * Typically, data is passed into an inbound integration as XML or JSON in the request
+ * body, but you can represent the data in another format or include it as a query
+ * parameter appended to the URL.
+ *
+ * The script's built-in request object enables you to access elements of the
+ * request, including the payload contained in the request body and any URL
+ * parameters. The following code snippets show how to retrieve these values.
+ * Choose the option that matches how your system includes data in the request to
+ * the inbound integration URL.
+ */
+
+var payload = JSON.parse(request.body);  //Use this if the payload is a JSON object in the request body
+
+
+
+var object_type = payload.message.object_type;
+var user = payload.message.transaction.user.username;
+var title = payload.message.state['500a0d67-9c48-4145-920c-821033e4a832'].value;  //Called Name in the json
+var colour = payload.message.state['b0778de0-a927-11e2-9e96-0800200c9a66'].value;  //Called Display Color in the json
+var description = payload.message.state['b5bae981-bfe6-4980-844a-b5ecf3e9a156'].value;
+var object_id = payload.message.state['2910ca71-9779-4e7b-8fcf-d718c919aff8'].value;
+var notes = payload.message.state['abb5af67-e70a-4a98-ad21-26f71bf4fe83'].value;
+var project = payload.message.state['ae8ecc9f-b9a0-42a4-a6e3-c83d7f8a7070'].value.name;
+var formatted_id = payload.message.state['55c5512a-1518-4944-8597-3eb91875e8d1'].value;
+var state = payload.message.state['e0caf6dd-304b-447e-9d61-09ac9c96e85a'].value.value;
+var postback_url = '/slm/webservice/v2.0/defect/' + object_id;
+var link_url = 'https://rally1.rallydev.com/slm/#/detail/defect/' + object_id;
+var blocked = payload.message.state['24aa2a9e-8b98-4028-a999-ea6ae4d47150'].value;
+var blocked_reason = payload.message.state['3c358996-adbd-48bc-bd6e-22e1338c8d57'].value;
+
+
+
+
+console.log('object_type = ' + object_type);
+console.log('user = ' + user);
+console.log('title = ' + title);
+console.log('colour = ' + colour);
+console.log('description = ' + description);
+console.log('object_id = ' + object_id);
+console.log('notes = ' + notes);
+console.log('project = ' + project);
+console.log('formatted_id = ' + formatted_id);
+console.log('state = ' + state);
+console.log('postback_url = ' + postback_url);
+console.log('link_url = ' + link_url);
+console.log('blocked = ' + blocked);
+console.log('blocked_reason = ' + blocked_reason);
+
+
+
+
+var trigger = JSON.stringify({
+"properties": {
+"object_type": object_type,
+"user": user,
+"title": title,
+"colour": colour,
+"description": description,
+"object_id": object_id,
+"notes": notes,
+"project": project,
+"formatted_id": formatted_id,
+"state": state,
+"postback_url": postback_url,
+"link_url": link_url,
+"blocked": blocked,
+"blocked_reason": blocked_reason,
+},
+});
+console.log( 'Response payload: ' + JSON.stringify( trigger ) );
+var req = http.request({
+method: 'POST',
+endpoint: 'xMatters',
+path: '/reapi/2015-04-01/forms/bf43c0e8-7999-4db4-89f2-49116c9e5845/triggers',
+headers: {
+'Content-Type': 'application/json'
+}
+});
+req.write(trigger);
+
+
+
