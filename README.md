@@ -34,7 +34,7 @@ This is a full closed loop integration, also allowing you to respond via the xMa
 5. Create webhook (with trigger) in CAAC via API
 6. Create a defect in CAAC
 7. Receive your xM alert, respond 'Set to Open'
-8. In CAAC, defect is moved from Submitted to Open
+8. In CAAC, defect is moved from Submitted to Open and the notes section gets updated!  (Not sure if notes is the best place to put the update but it works as a demo).
 
 
 For general information on the CAAC API look here https://rally1.rallydev.com/slm/doc/webservice/

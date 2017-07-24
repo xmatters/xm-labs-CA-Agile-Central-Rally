@@ -57,10 +57,13 @@ break;
 
 function SetToOpen(){
 
+var newnotes = payload.eventProperties.notes + '<br>' + payload.date + ' - Moved to Open by user ' + payload.recipient + ' via ' + payload.device + ' with comment - ' + payload.annotation;
+
 var trigger = JSON.stringify({
 "Defect":
     {      
-      "State": "Open"
+        "State": "Open",
+        "Notes": newnotes
     }
 });
 console.log( 'Response payload: ' + JSON.stringify( trigger ) );
