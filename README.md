@@ -50,7 +50,7 @@ For information on creating CAAC webhooks look here https://rally1.rallydev.com/
 	- Copy the form's Web Service URL.
 3. Edit the xMatters inbound integration (CA Agile Insight - Rally):
 	- Set the path to be the Web Service URL of the 'CA Agility Central - Defect' form above.
-	- This is the complicated part... lines 43 to 56 parse out the parameters we want from the large and ugly incoming json packet.  You'll see some of the lines, such as line 45 for the title, have a UUID in them, I suspect they'll be different values for you.  If so you can look at the bottom of this page to see the section 'How to find an Attribute UUID'.  I found it easier (not knowing CAAC) to just set up the integration and from teh xMatters activity stream look at the entire incoming json (in TextWrangler or similar) and work my way through them.  For example, if you search for Notes you get this section...
+	- This is the complicated part... lines 43 to 56 parse out the parameters we want from the large and ugly incoming json packet.  You'll see some of the lines, such as line 45 for the title, have a UUID in them, I suspect they'll be different values for you.  If so you can look at the bottom of this page (https://rally1.rallydev.com/notifications/docs/webhooks) to see the section 'How to find an Attribute UUID'.  I found it easier (not knowing CAAC) to just set up the integration and from the xMatters activity stream look at the entire incoming json (in TextWrangler or similar) and work my way through them.  For example, if you search for Notes you get this section...
 
 		"abb5af67-e70a-4a98-ad21-26f71bf4fe83":{"value":"These are some notes","type":"Text","name":"Notes","display_name":"Notes","ref":null},
 
@@ -59,7 +59,7 @@ For information on creating CAAC webhooks look here https://rally1.rallydev.com/
 4. Edit the outbound integration:
 	- Check that the URL for the CAAgile endpoint is set to https://rally1.rallydev.com
 	- Change the ZSESSIONID value to be that of your CAAC API key from step 1
-5. Create a webhook in CAAC, this has criteria which when matched send the info to a webhook (xMatters).  This was a bit tricky to work out as you can delete them through teh web UI but have to craete them via the API.  Here's my example of creating one that fires when a new defect gets created (STATE = Submitted).
+5. Create a webhook in CAAC, this has criteria which when matched send the info to a webhook (xMatters).  This was a bit tricky to work out as you can delete them through the web UI but have to craete them via the API.  Here's my example of creating one that fires when a new defect gets created (STATE = Submitted).
 	- Get a REST client tool, I use the one from Wiztools, available at https://github.com/wiztools/rest-client/releases.  I tried using a browser based tool but that kept failing authentication.
 	- Set the URL as https://rally1.rallydev.com/notifications/api/v2/webhook and the method as POST
 	- Set content type as application/json
