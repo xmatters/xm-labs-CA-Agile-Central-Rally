@@ -17,10 +17,10 @@ This is a full closed loop integration, also allowing you to respond via the xMa
 
 # Files
 
-* [CAAgileCentralRally.zip](CAAgileCentralRally.zip) - The comm plan (that has all the scripts and email format and such)
+* [CAAgileCentralRally.zip](CAAgileCentralRally.zip) - The comm plan (that has all the scripts and email format and such).
 * [CAAC_Inbound_Integration.txt](CAAC_Inbound_Integration.txt) - The Integration Builder JS to setup the inbound integration into xMatters from CAAC, should you need it standalone to the Comm Plan.
 * [CAAC_Outbound_Integration.txt](CAAC_Outbound_Integration.txt) - The Integration Builder JS to setup the outbound integration from xMatters back to CAAC, should you need it standalone to the Comm Plan.
-* [Loggly_xMatters_Integration.mp4](Media/Loggly_xMatters_Integration.mp4) - Video example of the finished integration
+* [CA_Agile_Central_was_Rally.mp4](Media/CA_Agile_Central_was_Rally.mp4) - Video example of the finished integration.
 
 
 # Installation
