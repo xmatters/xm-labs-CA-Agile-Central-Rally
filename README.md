@@ -1,12 +1,18 @@
 
----
-
 # CA Agile Central (CAAC), previously known as Rally
 CA Agile Central is an enterprise-class platform that’s purpose-built for scaling agile development practices. Provide a hub for teams to collaboratively plan, prioritize and track work on a synchronized cadence.
 
 This xM Labs Integration is far from a complete integration, think more of it as a good starting point. It allows you to connect up a CAAC cloud instance to an xMatters On Demand account to inject events into xMatters based on triggers you set in CAAC, for example when a defect status gets set to Submitted i.e. a new defect has been created.
 
 This is a full closed loop integration, also allowing you to respond via the xMatters notification and have that take effect within CAAC, for example move the defect from Submitted to Open.
+
+---------
+
+<kbd>
+  <img src="https://github.com/xmatters/xMatters-Labs/raw/master/media/disclaimer.png">
+</kbd>
+
+---------
 
 
 # Pre-Requisites
