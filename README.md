@@ -53,9 +53,8 @@ For information on creating CAAC webhooks look here https://rally1.rallydev.com/
 1. Log into CAAC, then browse to https://rally1.rallydev.com/login/accounts/index.html#/keys and add an API key.  Copy the API key value, e.g. _G0909ODSU7DFG98HEHKJEWKRJH9FSIF
 2. Load the attached Comm Plan into xMatters.  Review the Form (CA Agility Central - Defect) configuration:
 	- You may want to change the message options (i.e. turn off voice in devices) and add recipients.  
-	- Copy the form's Web Service URL.
 3. Edit the xMatters inbound integration (CA Agile Insight - Rally):
-	- Set the path to be the Web Service URL of the 'CA Agility Central - Defect' form above.
+	- Set the path to be the inbound integration URL of the 'CA Agility Central - Defect' form above.
 	- This is the complicated part... lines 43 to 56 parse out the parameters we want from the large and ugly incoming json packet.  You'll see some of the lines, such as line 45 for the title, have a UUID in them, I suspect they'll be different values for you.  If so you can look at the bottom of this page (https://rally1.rallydev.com/notifications/docs/webhooks) to see the section 'How to find an Attribute UUID'.  I found it easier (not knowing CAAC) to just set up the integration and from the xMatters activity stream look at the entire incoming json (in TextWrangler or similar) and work my way through them.  For example, if you search for Notes you get this section...
 
 		"abb5af67-e70a-4a98-ad21-26f71bf4fe83":{"value":"These are some notes","type":"Text","name":"Notes","display_name":"Notes","ref":null},
